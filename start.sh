@@ -16,26 +16,7 @@ function dbuild() {
 # run a docker image
 function drun() {
     container=$1
-    shift
-    args=$@
-
-    while test $# -gt 0; do
-        case "$1" in
-            -p)
-                shift
-                echo "$VBOX modifyvm 'boot2docker-vm' --natpf1 'tcp-port$1,tcp,,$1,,$1'"
-                echo "$VBOX modifyvm 'boot2docker-vm' --natpf1 'udp-port$1,udp,,$1,,$1'"
-                shift
-                ;;
-            *)
-                break
-                ;;
-        esac
-    done
-
-    echo "$DOCKER run -h='$container.devcloud.com' -i -t --name='$container' $args 'sdchua/$container'"
-    # $DOCKER run -h="$container.devcloud.com" -i -t --name="$container" "sdchua/$container"
-    return $?
+    . $DIR/$container/run.sh
 }
 
 # clean all ps
@@ -45,23 +26,28 @@ function dclean() {
     done
 }
 
-## Use `source start.sh` instead
-# while test $# -gt 0; do
-#     case "$1" in
-#         -h|--help)
-#             echo "Usage:"
-#             exit 0
-#             ;;
-#         -b)
-#             shift
-#             if test $# -gt 0; then
-#                 build $1
-#             fi
-#             shift
-#             ;;
-#         *)
-#             break
-#             ;;
-#     esac
-# done
+function vb() {
+    vm="boot2docker-vm"
+    action=$1
+    shift
+    args=$@
+    [ $action == "-d" ] && vb_port_delete $vm $args
+    [ $action == "-a" ] && vb_port_add $vm $args
+}
+
+function vb_port_delete() {
+    vm=$1
+    port=`echo $2 | cut -d':' -f1`
+
+    echo "$vm" --natpf1 delete "tcp-port$port"
+}
+
+function vb_port_add() {
+    vm=$1
+    host_port=`echo $2 | cut -d':' -f1`
+    container_port=`echo $2 | cut -d':' -f2`
+
+    echo modifyvm "boot2docker-vm" --natpf1 "tcp-port$host_port,tcp,,$host_port,,$container_port"
+    echo modifyvm "boot2docker-vm" --natpf1 "udp-port$host_port,udp,,$host_port,,$container_port"
+}
 
