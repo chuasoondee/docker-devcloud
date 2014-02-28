@@ -11,13 +11,12 @@ RUN     rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 RUN     yum install -y jenkins
 RUN     chkconfig jenkins off
 
-RUN     mkdir /home/jenkins
-RUN     chown jenkins:jenkins /home/jenkins
-ENV     JENKINS_HOME /home/jenkins
+# RUN     mkdir /home/jenkins
+# RUN     chown jenkins:jenkins /home/jenkins
+# ENV     JENKINS_HOME /home/jenkins
+# VOLUME  /repo
 
 ADD		jenkins-supervisord.conf /etc/supervisord/jenkins-supervisord.conf
-
-VOLUME  /home/jenkins
 
 EXPOSE	8080
 CMD		["/usr/bin/supervisord", "-c", "/etc/supervisord/supervisord.conf"]
