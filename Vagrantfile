@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "mirror", "/repo"
+  # config.vm.synced_folder "mirror", "/repo"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -51,7 +51,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "4096"]
   end
-  #
+
+  # config.vm.provision :shell do |s|
+  #   s.inline = "sudo yum update -y && sudo yum install -y docker-io"
+  # end
+  
   # View the documentation for the provider you're using for more
   # information on available options.
 

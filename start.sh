@@ -1,10 +1,10 @@
 #!/bin/bash
 # set -e
 
+export PATH=$DIR/bin:$PATH
+
 DIR="$(cd "$(dirname "${BASE_SOURCE[0]}")" && pwd)"
 DOCKER=`command -v docker` || exit 1
-
-export PATH=$DIR/bin:$PATH
 
 # build a docker image
 function dbuild() {
@@ -13,9 +13,10 @@ function dbuild() {
     return $?
 }
 
-# run a docker image
+# run a docker image. require container to have a 'run.sh'
 function drun() {
     container=$1
+    [ -f $DIR/$container/run.sh ] || exit 1
     . $DIR/$container/run.sh
 }
 

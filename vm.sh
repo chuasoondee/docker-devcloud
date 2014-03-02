@@ -1,4 +1,5 @@
 #!/bin/bash
+# functions to work in MacOSX. Currently inactive.
 
 DIR="$(cd "$(dirname "${BASE_SOURCE[0]}")" && pwd)"
 VM=`command -v VBoxManage` || exit 1
