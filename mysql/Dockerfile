@@ -9,10 +9,11 @@ MAINTAINER Chua Soon Dee <soondee.chua@gmail.com>
 RUN     yum install -y mysql-server
 
 ADD     my.cnf /etc/my.cnf
-ADD     configure.sh /configure.sh
-RUN     /configure.sh
-
+ADD     start.sh /opt/start.sh
 ADD     mysql-supervisord.conf /etc/supervisord/mysql-supervisord.conf
 
+# VOLUME
+VOLUME  /var/lib/mysql
+
 EXPOSE	3306
-CMD     ["/usr/bin/supervisord", "-c", "/etc/supervisord/supervisord.conf"]
+CMD     ["/opt/start.sh"]

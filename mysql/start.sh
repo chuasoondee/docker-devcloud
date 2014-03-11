@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -f /var/lib/mysqlibdata1 ]; then
-    /usr/bin/mysql_install_db --user=mysql --ldata=/var/lib/mysql
+    /usr/bin/mysql_install_db
 
     /usr/bin/mysqld_safe &
     sleep 10s
@@ -11,4 +11,6 @@ if [ ! -f /var/lib/mysqlibdata1 ]; then
     killall mysqld
     sleep 10s
 fi
+
+/usr/bin/supervisord -c /etc/supervisord/supervisord.conf
 

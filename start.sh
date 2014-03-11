@@ -3,6 +3,7 @@
 
 export PATH=$DIR/bin:$PATH
 
+VOL_HOME=$HOME/vol
 DIR="$(cd "$(dirname "${BASE_SOURCE[0]}")" && pwd)"
 DOCKER=`command -v docker` || exit 1
 
