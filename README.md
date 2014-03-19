@@ -2,7 +2,7 @@
 Goal is to automate creation of development environment.
 
 ## Building
-You'll need to build a `base` image from any `centos` images available in docker index.
+You'll need to manually build a `base` image from any `centos` images available in docker index.
 I've used `hansode/centos-6.5-x86_64`. To build
 
 ```shell
@@ -28,11 +28,20 @@ do
 To build the "sdchua/base" image, `dbuild base`
 To build the "sdchua/jenkins" image, `dbuild jenkins`
 
+## Running
+```shell
+drun <image>: e.g. drun jenkins
+```
+
 ## Cookbook
 1. repo: Local Yum Mirror
 2. base: Base container where below list of container base on.
-2. jenkins: Jenkins
-3. SCM
-4. Maven Repository
-5. Test Environment
-6. Redmine Server
+3. Jenkins: Jenkins
+4. MySQL
+5. Redmine Server
+
+## TODO
+1. SCM
+2. Maven Repository
+3. Test Environment
+4. Prosody: Jabber Server
