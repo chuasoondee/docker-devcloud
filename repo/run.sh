@@ -7,5 +7,3 @@ $DOCKER run -i -t \
     -v $DIR/mirror:/repo \
     -d \
     "sdchua/$container"
-
-#$DIR/bin/pipework br1 $container 192.168.1.10

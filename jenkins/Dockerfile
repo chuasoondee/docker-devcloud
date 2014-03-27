@@ -1,11 +1,12 @@
 # Jenkins
-# VERSION 0.0.1
+# VERSION 0.0.2
 
 FROM sdchua/base
 MAINTAINER Chua Soon Dee <soondee.chua@gmail.com>
 
-# OPENJDK
+# JDKs
 RUN     yum install -y java-1.7.0-openjdk
+
 # JENKINS
 RUN     curl http://pkg.jenkins-ci.org/redhat/jenkins.repo > /etc/yum.repos.d/jenkins.repo
 RUN     rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
