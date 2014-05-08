@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 8080, host: 8080
 
   # for redmine
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  # config.vm.network :forwarded_port, guest: 9200, host: 9200
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
