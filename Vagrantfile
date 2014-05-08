@@ -5,10 +5,6 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "base"
 
@@ -21,6 +17,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # for redmine
   # config.vm.network :forwarded_port, guest: 9200, host: 9200
+
+  # for gitolite
+  config.vm.network :forwarded_port, guest:3022, host: 3022
+
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  config.vm.provider :virtualbox do |vb|
+    # Don't boot with headless mode
+    # vb.gui = true
+
+    # Use VBoxManage to customize the VM. For example to change memory:
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+  end
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -40,18 +52,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "mirror", "/repo"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  config.vm.provider :virtualbox do |vb|
-    # Don't boot with headless mode
-    # vb.gui = true
-
-    # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "4096"]
-  end
 
   # config.vm.provision :shell do |s|
   #   s.inline = "sudo yum update -y && sudo yum install -y docker-io"
