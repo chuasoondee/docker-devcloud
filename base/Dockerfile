@@ -24,5 +24,6 @@ RUN		python get-pip.py
 RUN		pip install supervisor
 ADD		supervisord.conf /etc/supervisord/supervisord.conf
 
-EXPOSE	22
+# Do not by default expose ssh
+# EXPOSE	22
 CMD		["/usr/bin/supervisord", "-c", "/etc/supervisord/supervisord.conf"]

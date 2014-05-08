@@ -9,7 +9,7 @@ I've used `hansode/centos-6.5-x86_64`. To build
 docker pull hansode/centos-6.5-x86_64
 docker run -t -i hansode/centos-6.5-x86_64 /bin/bash
 # within container
-passwd          # change root password
+passwd          # change root password. I used 'Password@01'
 yum update -y   # optionally update system
 exit            # exit from container thereby stopping container process
 # in host
@@ -36,12 +36,12 @@ drun <image>: e.g. drun jenkins
 ## Cookbook
 1. repo: Local Yum Mirror
 2. base: Base container where below list of container base on.
-3. Jenkins: Jenkins
-4. MySQL
-5. Redmine Server
+3. build: Jenkins
+4. database: MySQL
+5. pms: Redmine Server
+1. scm: Gitolite
 
 ## TODO
-1. SCM
 2. Maven Repository
 3. Test Environment
 4. Prosody: Jabber Server
